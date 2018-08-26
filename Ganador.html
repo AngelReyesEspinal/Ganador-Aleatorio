@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title> ¡Sé el próximo! </title>
+    <link rel="shortcut icon" type="image/x-icon" href="Fotos/icono.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        
+        body{
+            background: url('Fotos/background.jpg');
+            background-size: 100%;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        .titulo{
+            text-align: center;
+            font-size: 120px;
+            font-family: 'Great Vibes', cursive;
+            text-shadow: 1px 1px 1px white;
+        }
+
+        .botonLogin{
+            background-color: black !important;
+            color: white;
+            font-size: 50px !important;
+            text-shadow: 1px 1px 1px black;
+            border-top: white solid 1px;
+            border-bottom: white solid 1px;
+            width: 120%;
+            font-family: 'Great Vibes', cursive;
+            margin-top: 20px;
+            margin-left: -120px;
+        }
+
+        .botonLogin:hover{
+            background-color: white !important;
+            text-shadow: 1px 1px 1px black;
+            color: black !important;
+            border-top: black solid 1px;
+            border-bottom:black solid 2px;
+            cursor: pointer;
+        }
+
+        .imagen{
+            margin-top: -110px !important;
+            margin-left:550px;
+            height: 300px !important;
+            margin-bottom: 0;
+        }
+
+        .imagenGanador{
+            float: left;
+            margin-top: -110px !important;
+            margin-left:450px;
+            height: 300px !important;
+            margin-bottom: 0;
+        }
+
+        .nombre{
+            float: left;
+            margin-left: 10px !important;
+            margin-top: -100px !important;
+            font-size: 50px;
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .sueldo{
+            float: left;
+            margin-left: 10px !important;
+            margin-top: -50px !important;
+            font-size: 50px;
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .premio{
+            float: left;
+            margin-left: 10px !important;
+            margin-top: -70px !important;
+            font-size: 50px;
+            font-family: 'Great Vibes', cursive;
+        }
+
+    </style>
+  </head>
+  <body>
+    <main class="animated zoomInDown">
+        <h1 class="titulo"> ¡Inicia el sorteo! </h1>
+
+        <img v-if="buscarGanador == false" src="Fotos/gold.png" alt="Dinero" class="imagen animated infinite pulse">
+        <div v-else>
+            <img :src="Ganador.imagen" alt="Ganador" class="imagenGanador">
+            <h2 class="nombre animated infinite pulse" >Ganador: {{Ganador.nombre}}</h2>
+            <br>
+            <h2 class="sueldo animated infinite pulse" v-model="Ganador.sueldo"> Sueldo: ${{Ganador.sueldo}} X 5!</h2>
+            <br>
+            <br>
+            <br><br><br>
+            <h2 class="premio animated infinite pulse" v-model="premio"> Premio: ${{premio}}</h2>
+        </div>
+
+        <button v-if="buscarGanador == false" class="btn waves-effect waves-light botonLogin" v-on:click="obtenerGanador()"> 
+            ¡Iniciar!
+        </button>
+        <button v-else class="btn waves-effect waves-light botonLogin" v-on:click="obtenerGanador()"> 
+            ¡Buscar otro ganador!
+        </button>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: 'main',
+            data:{
+                Empleados: 
+                [
+                    {
+                        id: 1,
+                        nombre: 'Pedro Vitilla',
+                        sueldo: 100000,
+                        imagen: 'Fotos/FotosEmpleados/empleado1.jpg'
+                    },
+                    {
+                        id: 2,
+                        nombre: 'Mia Khalifa',
+                        sueldo: 200000,
+                        imagen: 'Fotos/FotosEmpleados/empleado2.jpg'
+                    },
+                    {
+                        id: 3,
+                        nombre: 'Lisa Ann',
+                        sueldo: 150000,
+                        imagen: 'Fotos/FotosEmpleados/empleado3.jpg'
+                    },
+                    {
+                        id: 4,
+                        nombre: 'Jordi Enp',
+                        sueldo: 200000,
+                        imagen: 'Fotos/FotosEmpleados/empleado4.jpg'
+                    },
+                    {
+                        id: 5,
+                        nombre: 'Lex Luthor',
+                        sueldo: 10000,
+                        imagen: 'Fotos/FotosEmpleados/empleado5.jpg'
+                    },
+                    {
+                        id: 6,
+                        nombre: 'Pablo Escobar',
+                        sueldo: 30000,
+                        imagen: 'Fotos/FotosEmpleados/empleado6.jpg'
+                    },
+                    {
+                        id: 7,
+                        nombre: 'Roque Espinal',
+                        sueldo: 80000,
+                        imagen: 'Fotos/FotosEmpleados/empleado7.jpg'
+                    },
+                    {
+                        id: 8,
+                        nombre: 'Linux Torvals',
+                        sueldo: 100000,
+                        imagen: 'Fotos/FotosEmpleados/empleado8.jpg'
+                    },
+                    {
+                        id: 9,
+                        nombre: 'Juana Ortega',
+                        sueldo: 50000,
+                        imagen: 'Fotos/FotosEmpleados/empleado9.jpg'
+                    },
+                    {
+                        id: 10,
+                        nombre: 'Filpa Díaz',
+                        sueldo: 17000,
+                        imagen: 'Fotos/FotosEmpleados/empleado10.jpg'
+                    },
+                    {
+                        id: 11,
+                        nombre: 'Angel Espinal',
+                        sueldo: 20000,
+                        imagen: 'Fotos/FotosEmpleados/empleado11.jpg'
+                    },
+                    {
+                        id: 12,
+                        nombre: 'Alejandro Villa',
+                        sueldo: 30000,
+                        imagen: 'Fotos/FotosEmpleados/empleado12.jpg'
+                    },
+                    {
+                        id: 13,
+                        nombre: 'Jairo Giron',
+                        sueldo: 60000,
+                        imagen: 'Fotos/FotosEmpleados/empleado13.jpg'
+                    },
+                    {
+                        id: 14,
+                        nombre: 'Luis Soto',
+                        sueldo: 9000,
+                        imagen: 'Fotos/FotosEmpleados/empleado14.jpg'
+                    },
+                    {
+                        id: 15,
+                        nombre: 'Mark B.',
+                        sueldo: 19000,
+                        imagen: 'Fotos/FotosEmpleados/empleado15.jpg'
+                    },
+                    {
+                        id: 16,
+                        nombre: 'Brian Gomez',
+                        sueldo: 30000,
+                        imagen: 'Fotos/FotosEmpleados/empleado16.jpg'
+                    },
+                    {
+                        id: 17,
+                        nombre: 'Odette Reyes',
+                        sueldo: 70000,
+                        imagen: 'Fotos/FotosEmpleados/empleado17.jpg'
+                    },
+                    {
+                        id: 18,
+                        nombre: 'Henry Viñeta',
+                        sueldo: 60000,
+                        imagen: 'Fotos/FotosEmpleados/empleado18.jpg'
+                    },
+                    {
+                        id: 19,
+                        nombre: 'Jairo Rodriguez',
+                        sueldo: 50000,
+                        imagen: 'Fotos/FotosEmpleados/empleado19.jpg'
+                    },
+                    {
+                        id: 20,
+                        nombre: 'Donald Trump',
+                        sueldo: 15000,
+                        imagen: 'Fotos/FotosEmpleados/empleado20.jpg'
+                    },
+                ],
+                id: 0,
+                premio: 0,
+                buscarGanador: false,
+                Ganador:{
+                    id: 0,
+                    nombre: '',
+                    sueldo: 0,
+                    imagen: ''
+                }
+            },
+            methods:{
+                obtenerGanador(){
+                    this.id = Math.floor(Math.random() * (20 - 1)) + 1;
+                    for(var i = 0 ; i < this.Empleados.length ; i++)
+                    {
+                        if(this.id == this.Empleados[i].id) {
+                            this.Ganador.id = this.Empleados[i].id;
+                            this.Ganador.nombre = this.Empleados[i].nombre;
+                            this.Ganador.sueldo = this.Empleados[i].sueldo;
+                            this.Ganador.imagen = this.Empleados[i].imagen;
+                            this.premio = this.Ganador.sueldo * 5;
+                            this.buscarGanador = true;
+                        } 
+                    }
+                },
+            }
+        });     
+    </script>
+  </body>
+</html>
